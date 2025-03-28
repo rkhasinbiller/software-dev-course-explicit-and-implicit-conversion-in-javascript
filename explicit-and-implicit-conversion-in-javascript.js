@@ -18,15 +18,34 @@ Use console.log() to clearly show the before-and-after type conversions.
 
 */
 
-
-let result = "5" - 2;
+// 1st Bug: Problem with Implicit Type Conversion
+// Bc of the parentheses, 5 was converted to a string. By adding Number () in front of it, I was able to convert to a Number.
+let result = Number("5") - 2;
 console.log("The result is: " + result);
 
-let isValid = Boolean("false");
-if (isValid) {
+// 2nd Bug: Wrong Boolean conversion
+// Check if the string is "false" before converting
+let isValid = Boolean("false"); 
+// The string "false" is truthy in JavaScript (Which means it evaluates to true.)
+if (isValid && isValid !== "false") { 
     console.log("This is valid!");
+} else {
+    console.log("This is NOT valid!");
 }
 
-let age = "25";
-let totalAge = age + 5;
+// 3rd Bug: Similar to the 1st bug, 25 was converted to a string. When this happened, it printed 255 instead of 30 (string concatenation). By changing age to a number (with Number()), I was able to get it to print 30 instead of 255.
+let age = ("25");
+let totalAge = Number(age) + 5;
 console.log("Total Age: " + totalAge);
+
+//Robert Hasinbiller Code
+
+let implicitExample = "15" * 3;
+console.log("Implicit Solution: ", implicitExample);
+// Output should be 45
+
+let explicitExample = Number("50");
+console.log("Explicit Solution: ", explicitExample, "Type:", typeof explicitExample);
+// Output should be 50 & number (i.e. type)
+
+console.log("NaN to Number:", Number(NaN));
